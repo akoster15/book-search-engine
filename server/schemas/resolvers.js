@@ -1,6 +1,6 @@
 const { Book, User } = require("../models");
 const { signToken } = require("../utils/auth");
-const { AuthError } = require("apollo-server-express");
+const { AuthenticationError } = require("apollo-server-express");
 
 const resolvers = {
     Query: {
@@ -12,7 +12,7 @@ const resolvers = {
                 return userData;
             }
 
-            throw new AuthError("You are not logged in!")
+            throw new AuthenticationError("You are not logged in!")
         }
     },
 
@@ -28,13 +28,13 @@ const resolvers = {
             const user = await User.findOne({ email });
       
             if (!user) {
-              throw new AuthError("Incorrect email and password!");
+              throw new AuthenticationError("Incorrect email and password!");
             }
       
             const correctPw = await user.isCorrectPassword(password);
       
             if (!correctPw) {
-              throw new AuthError("Incorrect email and password!");
+              throw new AuthenticationError("Incorrect email and password!");
             }
       
             const token = signToken(user);
