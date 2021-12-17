@@ -1,7 +1,5 @@
 # Book Search Engine
 
-----
-
 ## Description
 
 This project takes a Google Books API search engine, which was built with a RESTful API, and refactors it to be a GraphQL API built on an Apollo Server.
